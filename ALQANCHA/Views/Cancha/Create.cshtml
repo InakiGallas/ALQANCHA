@@ -1,0 +1,53 @@
+﻿@model ALQANCHA.Models.Cancha
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div class="container">
+    <div class="admin-background">
+        <h2>Crear Nueva Cancha</h2>
+        <h3>Cancha</h3>
+        <hr />
+        <div class="row">
+            <div class="col-md-6">
+                <form asp-action="Create">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="CantJugadores" class="control-label"></label>
+                        <select asp-for="CantJugadores" class="form-control">
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="8">8</option>
+                        </select>
+                        <span asp-validation-for="CantJugadores" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Descripcion" class="control-label"></label>
+                        <input asp-for="Descripcion" class="form-control" />
+                        <span asp-validation-for="Descripcion" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Telefono" class="control-label"></label>
+                        <input asp-for="Telefono" class="form-control" />
+                        <span asp-validation-for="Telefono" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="PrecioXHora" class="control-label"></label>
+                        <input asp-for="PrecioXHora" class="form-control" />
+                        <span asp-validation-for="PrecioXHora" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mt-3 d-flex justify-content-end">
+                        <input type="submit" value="Create" class="btn btn-primary me-2" />
+                        <a asp-action="Index" class="btn btn-secondary">Volver al Listado</a> 
+                    </div>
+                </form>
+            </div>       
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

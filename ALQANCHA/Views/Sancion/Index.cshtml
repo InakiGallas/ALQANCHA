@@ -1,0 +1,42 @@
+﻿@model IEnumerable<ALQANCHA.Models.Sancion>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="container">
+    <div class="admin-background">
+        <h2 class="text-center mt-4 mb-4">Listado de Sanciones</h2>
+        <hr />
+        <p>
+            <a asp-action="Create" class="btn btn-primary">Asignar Nueva Sanción</a>
+        </p>
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.Descripcion)</th>
+                    <th>@Html.DisplayNameFor(model => model.FechaImposicion)</th>
+                    <th>Jugador</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Descripcion</td>
+                        <td>@item.FechaImposicion.ToShortDateString()</td>
+                        <td>@item.Jugador.Nombre @item.Jugador.Apellido</td>
+                        <td>
+                            <div class="btn-group btn-group-sm" role="group">
+                                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary">Edit</a>
+                                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info">Details</a>
+                                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

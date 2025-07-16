@@ -1,0 +1,77 @@
+﻿@model IEnumerable<ALQANCHA.Models.Jugador>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<style>
+    .col-check {
+        width: 50px;
+        text-align: center;
+    }
+
+    .btn-group-sm > .btn {
+        margin-right: 4px;
+    }
+
+    .table td, .table th {
+        vertical-align: middle;
+    }
+</style>
+
+<div class="container">
+    <div class="admin-background">
+        <h2>Listado de Jugadores</h2>
+        <hr />
+        <p>
+            <a asp-action="Create" class="btn btn-primary">Crear Nuevo Jugador</a>
+        </p>
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Dni</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Email</th>
+                    <th>Teléfono</th>
+                    <th class="col-check">¿Es arquero?</th>
+                    <th class="col-check">¿Es jugador?</th>
+                    <th>Fecha Disponible</th>
+                    <th>Hora de Inicio</th>
+                    <th class="col-check">¿Está sancionado?</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Dni</td>
+                        <td>@item.Nombre</td>
+                        <td>@item.Apellido</td>
+                        <td>@item.Email</td>
+                        <td>@item.Telefono</td>
+                        <td class="text-center">
+                            <input type="checkbox" disabled @(item.EsArquero ? "checked" : "") />
+                        </td>
+                        <td class="text-center">
+                            <input type="checkbox" disabled @(item.EsJugador ? "checked" : "") />
+                        </td>
+                        <td>@item.FechaDisponible.ToShortDateString()</td>
+                        <td>@item.HoraInicio</td>
+                        <td class="text-center">
+                            <input type="checkbox" disabled @(item.EstaSancionado ? "checked" : "") />
+                        </td>
+                        <td>
+                            <div class="btn-group btn-group-sm" role="group">
+                                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary">Edit</a>
+                                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info">Details</a>
+                                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

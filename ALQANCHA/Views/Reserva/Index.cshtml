@@ -1,0 +1,109 @@
+﻿@model IEnumerable<ALQANCHA.Models.Reserva>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<style>
+    .col-check {
+        width: 40px;
+        text-align: center;
+        
+    }
+
+    .btn-group a {
+        margin-right: 5px;
+    }
+
+    .btn-group {
+        flex-wrap: nowrap;
+    }
+
+    .acciones-col {
+        min-width: 160px;
+        white-space: nowrap;
+    }
+
+    .table-responsive {
+        overflow-x: auto;
+    }
+
+    .table td, .table th {
+        vertical-align: middle;
+    }
+</style>
+
+<div class="container">
+    <div class="admin-background">
+        <h2 class="text-center mt-4 mb-4">Listado de Reservas</h2>
+        <hr />
+        <p>
+            <a asp-action="Create" class="btn btn-primary">Crear Nueva Reserva</a>
+        </p>
+
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        
+                        <th>Cancha</th>
+                        <th>Fecha</th>
+                        <th>Hora de Inicio</th>
+                        <th>Nombre</th>
+                    
+                        
+                        <th class="col-check">Requieren Jugador</th>
+                        <th class="col-check">Requieren Arquero</th>
+                        <th class="col-check">Stream</th>
+                        <th>Tipo Reserva</th>
+                        <th class="col-check">Confirmada</th>
+                        <th>Jugadores Requeridos</th>
+                        <th>Precio/Hora</th>
+                        <th class="acciones-col">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            
+                            <td>@item.Cancha.Descripcion</td>
+                            <td>@item.FechaReserva.ToShortDateString()</td>
+                            <td>@item.HoraInicio</td>
+                            <td>@item.Nombre</td>
+                           
+
+                            <td class="text-center">
+                                <input type="checkbox" disabled @(item.RequiereJugador ? "checked" : "") />
+                            </td>
+                            <td class="text-center">
+                                <input type="checkbox" disabled @(item.RequiereArquero ? "checked" : "") />
+                            </td>
+                            <td class="text-center">
+                                <input type="checkbox" disabled @(item.EsStream ? "checked" : "") />
+                            </td>
+                            <td>@item.TipoReserva</td>
+                            <td class="text-center">
+                                <input type="checkbox" disabled @(item.Confirmada ? "checked" : "") />
+                            </td>
+                            <td>
+                                @foreach (var jugador in item.ReservaJugadores)
+                                {
+                                    <div>@jugador.Jugador.Nombre</div>
+                                }
+                            </td>
+                            <td>@item.PrecioFinal</td>
+                            <td class="acciones-col">
+                                <div class="btn-group btn-group-sm" role="group">
+                                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary">Edit</a>
+                                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info">Details</a>
+                                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

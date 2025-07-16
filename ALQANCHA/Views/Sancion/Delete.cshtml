@@ -1,0 +1,42 @@
+﻿@model ALQANCHA.Models.Sancion
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<div class="container">
+    <div class="admin-background">
+        <h2>Eliminar Sanción</h2>
+        <h3>¿Estás seguro de que deseas eliminar esto?</h3>
+
+        <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Descripcion)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.FechaImposicion)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.FechaImposicion)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Jugador)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Jugador.Id)
+        </dd>
+        </dl>
+
+        <form asp-action="Delete">
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group mt-3 d-flex justify-content-end">
+                <input type="submit" value="Delete" class="btn btn-danger me-2" />
+                <a asp-action="Index" class="btn btn-secondary">Volver al Listado</a>
+            </div>
+        </form>
+    </div>
+</div>

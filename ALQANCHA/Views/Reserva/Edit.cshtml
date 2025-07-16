@@ -1,0 +1,192 @@
+﻿@model ALQANCHA.Models.Reserva
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<div class="container">
+    <div class="admin-background">
+        <h2>Editar Reserva</h2>
+        <hr />
+<div class="row">
+            <div class="overflow-auto" style="max-height: 500px;">
+                <form id="reservaForm" asp-action="Edit" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="AdministradorId" class="control-label">Administrador</label>
+                <select asp-for="AdministradorId" class="form-control" asp-items="ViewBag.AdministradorId" disabled></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="CanchaId" class="control-label">Cancha</label>
+                <select asp-for="CanchaId" class="form-control" asp-items="ViewBag.CanchaId" disabled></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="FechaReserva" class="control-label"></label>
+                <input asp-for="FechaReserva" class="form-control" type="date" />
+                <span asp-validation-for="FechaReserva" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HoraInicio" class="control-label"></label>
+                <select asp-for="HoraInicio" class="form-control" asp-items="ViewBag.HorasDisponibles"></select>
+                <span asp-validation-for="HoraInicio" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Nombre" class="control-label"></label>
+                <input asp-for="Nombre" class="form-control" />
+                <span asp-validation-for="Nombre" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Apellido" class="control-label"></label>
+                <input asp-for="Apellido" class="form-control" />
+                <span asp-validation-for="Apellido" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Telefono" class="control-label"></label>
+                <input asp-for="Telefono" class="form-control" />
+                <span asp-validation-for="Telefono" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Correo" class="control-label"></label>
+                <input asp-for="Correo" class="form-control" />
+                <span asp-validation-for="Correo" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="RequiereJugador" id="RequiereJugador" /> @Html.DisplayNameFor(model => model.RequiereJugador)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="RequiereArquero" id="RequiereArquero" /> @Html.DisplayNameFor(model => model.RequiereArquero)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="CantJugadores" class="control-label"></label>
+                <input asp-for="CantJugadores" class="form-control" disabled />
+                <span asp-validation-for="CantJugadores" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Jugadores Disponibles</label>
+                <select asp-for="ReservaJugadores" id="Jugadores" class="form-control" asp-items="ViewBag.JugadoresDisponibles" multiple="multiple" disabled></select>
+                <span id="jugadoresValidation" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TipoReserva" class="control-label"></label>
+                <select asp-for="TipoReserva" class="form-control" asp-items="ViewBag.TipoReserva"></select>
+                <span asp-validation-for="TipoReserva" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Confirmada" /> @Html.DisplayNameFor(model => model.Confirmada)
+                </label>
+            </div>
+                    <div class="form-group mt-3 d-flex justify-content-end">
+                        <input type="submit" value="Create" class="btn btn-primary me-2" />
+                        <a asp-action="Index" class="btn btn-secondary">Volver al Listado</a>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    </div>
+
+@section Scripts {
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            function actualizarCantidadJugadores() {
+                var requiereJugador = $('#RequiereJugador').is(':checked');
+                var requiereArquero = $('#RequiereArquero').is(':checked');
+                var minJugadores = (requiereJugador ? 1 : 0) + (requiereArquero ? 1 : 0);
+                $('#CantJugadores').attr('min', minJugadores);
+                var cantidadJugadores = parseInt($('#CantJugadores').val());
+                if (cantidadJugadores < minJugadores) {
+                    $('#CantJugadores').val(minJugadores);
+                }
+            }
+
+            $('#FechaReserva, #HoraInicio, #RequiereJugador, #RequiereArquero').change(function () {
+                var fecha = $('#FechaReserva').val();
+                var hora = $('#HoraInicio').val();
+                var requiereJugador = $('#RequiereJugador').is(':checked');
+                var requiereArquero = $('#RequiereArquero').is(':checked');
+
+                actualizarCantidadJugadores();
+
+                if (fecha && hora) {
+                    $.getJSON('@Url.Action("ObtenerJugadoresDisponiblesAjax", "Reserva")', {
+                        fechaReserva: fecha,
+                        horaInicio: hora,
+                        requiereJugador: requiereJugador,
+                        requiereArquero: requiereArquero
+                    }, function (data) {
+                        var jugadoresSelect = $('#Jugadores');
+                        jugadoresSelect.empty();
+                        $.each(data, function (index, item) {
+                            jugadoresSelect.append($('<option></option>').val(item.id).html(item.nombre));
+                        });
+                    });
+                }
+            });
+
+            $('#CanchaId').change(function () {
+                var canchaId = $(this).val();
+                if (canchaId) {
+                    $.getJSON('@Url.Action("GetCanchaDetails", "Reserva")', { id: canchaId }, function (data) {
+                        var maxJugadores = data.cantJugadores;
+                        $('#CantJugadores').attr('max', maxJugadores);
+                    });
+                }
+            });
+
+            $('#reservaForm').submit(function (event) {
+                var requiereJugador = $('#RequiereJugador').is(':checked');
+                var requiereArquero = $('#RequiereArquero').is(':checked');
+                var jugadoresSeleccionados = $('#Jugadores').val().length;
+
+                console.log('Requiere Jugador:', requiereJugador);
+                console.log('Requiere Arquero:', requiereArquero);
+                console.log('Jugadores Seleccionados:', jugadoresSeleccionados);
+
+                if ((requiereJugador || requiereArquero) && jugadoresSeleccionados == 0) {
+                    event.preventDefault();
+                    $('#Jugadores').css('border', '2px solid blue');
+                    $('#jugadoresValidation').text('Por favor, seleccione al menos un jugador disponible.');
+                } else {
+                    $('#Jugadores').css('border', '');
+                    $('#jugadoresValidation').text('');
+                    console.log('Formulario válido, enviando...');
+
+                    event.preventDefault(); 
+                    var form = $(this);
+
+                    $.ajax({
+                        type: form.attr('method'),
+                        url: form.attr('action'),
+                        data: form.serialize(),
+                        success: function (response) {
+                            console.log('Respuesta del servidor:', response);
+                            if (response.success) {
+                                window.location.href = response.redirectUrl;
+                            } else {
+                                console.log('Error en la actualización de la reserva:', response.error);
+                                $('#jugadoresValidation').text(response.error);
+                            }
+                        },
+                        error: function (error) {
+                            console.log('Error en la respuesta del servidor:', error);
+                            $('#jugadoresValidation').text('Error al actualizar la reserva. Inténtelo de nuevo.');
+                        }
+                    });
+                }
+            });
+
+            actualizarCantidadJugadores();
+        });
+    </script>
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

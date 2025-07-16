@@ -1,0 +1,141 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+
+main {
+    flex: 1; /* Ocupa el espacio restante y empuja el footer hacia abajo */
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    background-color: rgba(0, 0, 0, 0.6); /* fondo oscuro translúcido */
+    background-size: 60% 60%;
+    border-radius: 50%;
+    padding: 15px;
+    filter: invert(1); /* convierte el ícono en blanco */
+    width: 50px;
+    height: 50px;
+}
+
+.carousel-inner {
+    width: 100%;
+    max-width: 720px; /* Tamaño fijo del carrusel */
+    height: 350px; /* Alto fijo */
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+    .carousel-inner img {
+        object-fit: cover; /* Recorta manteniendo proporciones sin deformar */
+        width: 100%;
+        height: 100%;
+    }
+
+.btn-buscar {
+    background-color: #1c6e3a;
+    color: white;
+    border: none;
+    transition: background-color 0.3s ease;
+}
+
+.btn-buscar:hover {
+        background-color: #14542c;
+}
+
+body {
+    font-family: 'Nunito', sans-serif;
+    margin-top: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+    background-image: url('/images/home-futbol-fondo.png') !important;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    padding-bottom: 70px;
+}
+.logo-navbar {
+    height:60px; /* más alto pero no excesivo */
+    width: auto; /* mantiene proporción */
+    object-fit: contain; /* que no se corte */
+    background: transparent;
+    padding: 5px;
+}
+
+/* Estilos adicionales */
+
+.carousel-item img {
+    max-height: 500px; /* Ajusta la altura máxima de las imágenes */
+    object-fit: cover; /* Ajusta el método de ajuste de la imagen */
+}
+
+h1 {
+    text-align: center;
+    font-family: 'Nunito', sans-serif;
+    color: #D8F1BF;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+    font-weight: bold;
+}
+
+.footer {
+    text-align: center;
+    background-color: #162A02;
+    opacity: 100%;
+}
+
+.whatsapp-link {
+    font-family: 'Nunito', sans-serif; 
+    font-weight: bold; 
+    color: #000; /* Cambia el color del texto si es necesario */
+
+}
+
+nav.navbar.navbar-light {
+    background-color: #6E835A !important;
+}
+
+nav.navbar.navbar-brand {
+    font-family: 'Nunito', sans-serif;
+    font-weight: bold;
+}
+
+.admin-background {
+    background-color: rgba(255, 255, 255, 0.8); /* Color de fondo con transparencia */
+    padding: 20px; /* Espacio interno alrededor del contenido */
+    border-radius: 10px; /* Bordes redondeados para el contenedor */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+
+h2 {
+    text-align: center;
+    font-family: 'Nunito', sans-serif;
+    color: #5D7349;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+    font-weight: bold;
+}
+
+h3 {
+    font-family: 'Nunito', sans-serif;
+    color: #40423E;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+    font-weight: bold;
+    font-size: 1.25rem;
+}

@@ -1,0 +1,41 @@
+﻿@{
+    ViewData["Title"] = "Inicio";
+}
+
+<body>
+    <div class="container mt-4">
+        <div class="text-center">
+            <h1 class="display-4 mb-3 text-success fw-bold">¡Bienvenido a ALQANCHA!</h1>
+            <p class="lead text-muted">La app para reservar canchas, encontrar jugadores y vivir el fútbol como nunca.</p>
+        </div>
+
+        <!-- Carrusel -->
+        <div id="carouselFutbol" class="carousel slide mt-4 mb-4 carrusel-ajustado" data-bs-ride="carousel">
+
+            <div class="carousel-inner rounded-4 shadow">
+                <div class="carousel-item active">
+                    <img src="https://marcopark.mx/wp-content/uploads/2021/09/1.jpeg" class="d-block w-100" alt="Fútbol 1">
+                </div>
+                <div class="carousel-item">
+                    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiaSWnekiFRIjEnozOhh9klkhKU4mQl0ojIyDqiTO97o7HsAJ0anZb40OFHGc9UXnSUSGis9ag3EPOL8QfkW5N-NQ7su5CPTb1Yn9OqQaqaYo7JUivfxRdhg1jGk6AkTyNB4XdWgy7ui2k/s1600/index1.jpg" class="d-block w-100" alt="Fútbol 2">
+                </div>
+                <div class="carousel-item">
+                    <img src="https://geba.host/wp-content/uploads/2025/06/geba_futbol_masc_azul_csf.jpg" class="d-block w-100" alt="Fútbol 3">
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselFutbol" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Anterior</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselFutbol" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Siguiente</span>
+            </button>
+        </div>
+
+        <!-- Llamado a la acción -->
+        <div class="text-center">
+            <a class="btn btn-success btn-lg" href="/Reserva/Create">Reservar una cancha ahora</a>
+        </div>
+    </div>
+</body>

@@ -1,0 +1,53 @@
+﻿@model IEnumerable<ALQANCHA.Models.Cancha>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="container">
+    <div class="admin-background">
+        <h2 class="text-center mt-4 mb-4">Listado de Canchas</h2>
+        <hr />
+        <p>
+            <a asp-action="Create" class="btn btn-primary">Crear Nueva Cancha</a>
+        </p>
+
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.CantJugadores)</th>
+                    <th>@Html.DisplayNameFor(model => model.Descripcion)</th>
+                    <th>@Html.DisplayNameFor(model => model.Telefono)</th>
+                    <th>@Html.DisplayNameFor(model => model.PrecioXHora)</th>
+                    <th>Reservada</th>
+                    <th>Confirmada</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.CantJugadores</td>
+                        <td>@item.Descripcion</td>
+                        <td>@item.Telefono</td>
+                        <td>@item.PrecioXHora</td>
+                        <td class="text-center">
+                            <input type="checkbox" disabled @(item.Reservada ? "checked" : "") />
+                        </td>
+                        <td class="text-center">
+                            <input type="checkbox" disabled @(item.Confirmada ? "checked" : "") />
+                        </td>
+                        <td>
+                            <div class="btn-group btn-group-sm" role="group">
+                                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary">Edit</a>
+                                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info">Details</a>
+                                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

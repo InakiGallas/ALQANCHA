@@ -1,0 +1,79 @@
+﻿@model ALQANCHA.Models.Jugador
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div class="container">
+    <div class="admin-background">
+        <h2>Crear Nuevo Jugador</h2>
+        <h4>Jugador</h4>
+        <hr />
+        <div class="row">
+            <div class="col-md-6">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Dni" class="control-label"></label>
+                <input asp-for="Dni" class="form-control" />
+                <span asp-validation-for="Dni" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Nombre" class="control-label"></label>
+                <input asp-for="Nombre" class="form-control" />
+                <span asp-validation-for="Nombre" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Apellido" class="control-label"></label>
+                <input asp-for="Apellido" class="form-control" />
+                <span asp-validation-for="Apellido" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Telefono" class="control-label"></label>
+                <input asp-for="Telefono" class="form-control" />
+                <span asp-validation-for="Telefono" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="EsArquero" /> @Html.DisplayNameFor(model => model.EsArquero)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="EsJugador" /> @Html.DisplayNameFor(model => model.EsJugador)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="FechaDisponible" class="control-label"></label>
+                <input asp-for="FechaDisponible" class="form-control" type="date" />
+                <span asp-validation-for="FechaDisponible" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HoraInicio" class="control-label"></label>
+                <select asp-for="HoraInicio" class="form-control" asp-items="ViewBag.HorasDisponibles"></select>
+                <span asp-validation-for="HoraInicio" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="EstaSancionado" /> @Html.DisplayNameFor(model => model.EstaSancionado)
+                </label>
+            </div>
+                    <div class="form-group mt-3 d-flex justify-content-end">
+                        <input type="submit" value="Create" class="btn btn-primary me-2" />
+                        <a asp-action="Index" class="btn btn-secondary">Volver al Listado</a>
+                    </div>
+        </form>
+            </div>
+        </div>
+    </div>
+
+    @section Scripts {
+        @{
+            await Html.RenderPartialAsync("_ValidationScriptsPartial");
+        }
+    }
